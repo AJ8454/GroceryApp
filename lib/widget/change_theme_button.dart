@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/utility/constant.dart';
 import 'package:provider/provider.dart';
 import '../provider/theme_provider.dart';
 
@@ -14,7 +15,7 @@ class ChangeThemeButtonWidget extends StatelessWidget {
       children: [
         Icon(
           themeProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
-          color: Theme.of(context).iconTheme.color,
+          color: Colors.amber,
         ),
         Switch.adaptive(
           value: themeProvider.isDarkMode,
@@ -22,7 +23,7 @@ class ChangeThemeButtonWidget extends StatelessWidget {
             final provider = Provider.of<ThemeProvider>(context, listen: false);
             provider.toogleTheme(value);
           },
-          inactiveThumbColor: Theme.of(context).iconTheme.color,
+          inactiveThumbColor: kGreyColor,
           activeColor: Theme.of(context).iconTheme.color,
         ),
       ],

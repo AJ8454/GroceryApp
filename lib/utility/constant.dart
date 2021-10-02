@@ -5,6 +5,7 @@ const String kApptitle = 'Grocery App';
 const kLightColor = Color(0xFFFCFBF9);
 const kDarkColor = Color(0xFF1A1A1A);
 const kGreyColor = Color(0xFF6F737C);
+const kCarrotColor = Color(0xFF510A32);
 const kPrimaryColor = Color(0xFFF4578E);
 
 const kAppbarTextStyle = TextStyle(

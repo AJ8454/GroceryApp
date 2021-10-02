@@ -30,7 +30,7 @@ class _AuthPageState extends State<AuthPage> {
                 children: [
                   const Spacer(),
                   const Text(
-                    'Welcome,',
+                    'Grocery App',
                     style: kLabelTextStyle,
                   ),
                   const Text(

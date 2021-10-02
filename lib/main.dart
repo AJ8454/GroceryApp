@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'initial_page.dart';
 import 'provider/email_sign_in_provider.dart';
 import 'provider/google_sign_in_provider.dart';
+import 'provider/product_provider.dart';
 import 'provider/theme_provider.dart';
 import 'utility/constant.dart';
 import 'utility/theme_data.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => ThemeProvider()),
         ChangeNotifierProvider(create: (ctx) => GoogleSignInProvider()),
         ChangeNotifierProvider(create: (ctx) => EmailSignInProvider()),
+        ChangeNotifierProvider(create: (ctx) => ProductProvider()),
       ],
       builder: (context, _) {
         final themeProvider = Provider.of<ThemeProvider>(context);

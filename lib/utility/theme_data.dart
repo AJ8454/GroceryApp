@@ -7,14 +7,13 @@ class MyThemeData {
     scaffoldBackgroundColor: kDarkColor,
     primaryColor: Colors.black,
     colorScheme: const ColorScheme.dark(),
-    iconTheme: IconThemeData(color: Colors.purple.shade200, opacity: 0.8),
   );
 
   static final lightTheme = ThemeData(
     fontFamily: 'OnePlus-Regular',
     scaffoldBackgroundColor: kLightColor,
     primaryColor: Colors.white,
+    appBarTheme: const AppBarTheme(backgroundColor: kCarrotColor),
     colorScheme: const ColorScheme.light(),
-    iconTheme: const IconThemeData(color: Colors.red, opacity: 0.8),
   );
 }
