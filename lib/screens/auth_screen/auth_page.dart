@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:grocery_app/provider/email_sign_in_provider.dart';
+import 'package:grocery_app/utility/constant.dart';
+import 'package:grocery_app/widget/authentication_widgets/signin_signup_label.dart';
+import 'package:provider/provider.dart';
+import 'login_form.dart';
+import 'signup_page.dart';
+
+class AuthPage extends StatefulWidget {
+  const AuthPage({Key? key}) : super(key: key);
+
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Spacer(),
+                  const Text(
+                    'Welcome,',
+                    style: kLabelTextStyle,
+                  ),
+                  const Text(
+                    'Sign in to Continue!',
+                    style: kLabelTextStyle2,
+                  ),
+                  const Spacer(),
+                  const LoginForm(),
+                  const Spacer(),
+                  SignInAndSignUpLabel(
+                      text1: 'I\'m a new user, ',
+                      text2: 'Sign Up',
+                      onClicked: () {
+                        final provider = Provider.of<EmailSignInProvider>(
+                            context,
+                            listen: false);
+                        provider.isLogin = !provider.isLogin;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpPage(),
+                          ),
+                        );
+                      }),
+                  const Spacer(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
