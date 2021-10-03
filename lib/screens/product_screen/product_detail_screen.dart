@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/provider/product_provider.dart';
 import 'package:grocery_app/utility/constant.dart';
+import 'package:grocery_app/widget/snack_bar.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -102,7 +104,20 @@ class ProductDetailScreen extends StatelessWidget {
                   elevation: 8,
                   shape: const StadiumBorder(),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  final provider =
+                      Provider.of<CartProvider>(context, listen: false);
+                  provider.addItem(
+                    loadedData.id!,
+                    loadedData.rate!,
+                    loadedData.title!,
+                    loadedData.imageUrl,
+                  );
+                  SnackBarWidget.showSnackBar(
+                    context,
+                    '${loadedData.title} added to cart.',
+                  );
+                },
                 child: const Icon(Icons.shopping_cart_outlined),
               ),
             ),

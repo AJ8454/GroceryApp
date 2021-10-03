@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
-import 'package:grocery_app/provider/product_provider.dart';
 import 'package:provider/provider.dart';
 import 'snack_bar.dart';
 
@@ -26,8 +25,7 @@ class CartItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context, listen: false);
-    final product = Provider.of<ProductProvider>(context, listen: false)
-        .findById(productId);
+
     return Dismissible(
       key: ValueKey(id),
       direction: DismissDirection.endToStart,
