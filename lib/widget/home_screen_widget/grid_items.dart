@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:grocery_app/provider/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class GridItems extends StatelessWidget {
   final String? imageUrl;
@@ -19,7 +21,8 @@ class GridItems extends StatelessWidget {
     return InkWell(
       splashColor: Colors.cyan[800],
       highlightColor: Colors.grey.withOpacity(0.5),
-      onTap: () {},
+      onTap: () => Navigator.of(context)
+          .pushNamed('/ProductDetailScreen', arguments: id),
       child: Card(
         elevation: 5,
         child: Padding(
@@ -58,7 +61,12 @@ class GridItems extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final provider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      provider.addItem(
+                          id!, double.parse(price!), title!, imageUrl!);
+                    },
                     icon: const Icon(
                       Icons.shopping_cart,
                     ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/provider/product_provider.dart';
 import 'package:grocery_app/utility/constant.dart';
 import 'package:grocery_app/widget/app_drawer.dart';
+import 'package:grocery_app/widget/badge.dart';
 import 'package:grocery_app/widget/change_theme_button.dart';
 import 'package:grocery_app/widget/home_screen_widget/product_grid.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-   var _isLoading = false;
+  var _isLoading = false;
   var _isInit = true;
 
   @override
@@ -45,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,11 +54,30 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text(kApptitle, style: kAppbarTextStyle),
           actions: const [ChangeThemeButtonWidget()]),
       drawer: const AppDrawer(),
-      body:_isLoading
-        ? const Center(
-            child: CircularProgressIndicator(),
-          )
-        : const ProductGrid(),
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : const ProductGrid(),
+      floatingActionButton: FloatingActionButton(
+        
+        onPressed: () => Navigator.of(context).pushNamed('/CartScreen'),
+        child: Consumer<CartProvider>(
+          builder: (_, cart, ch) => Badge(
+            child: ch!,
+            value: cart.itemCount.toString(),
+          ),
+          child: IconButton(
+            icon: const Icon(
+              Icons.shopping_cart_outlined,
+              size: 25,
+            ),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/CartScreen');
+            },
+          ),
+        ),
+      ),
     );
   }
 }

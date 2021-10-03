@@ -14,7 +14,6 @@ const kAppbarTextStyle = TextStyle(
 
 const kLabelTextStyle = TextStyle(
   fontSize: 25,
-  color: kDarkColor,
   fontWeight: FontWeight.bold,
 );
 

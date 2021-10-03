@@ -3,13 +3,20 @@ import 'package:grocery_app/provider/product_provider.dart';
 import 'package:grocery_app/widget/home_screen_widget/grid_items.dart';
 import 'package:provider/provider.dart';
 
+import '../snack_bar.dart';
+
 class ProductGrid extends StatelessWidget {
   const ProductGrid({Key? key}) : super(key: key);
 
   Future<void> fetchAllProducts(context) async {
     try {
       await Provider.of<ProductProvider>(context).fetchAndSetProducts();
-    } catch (error) {}
+    } catch (error) {
+      SnackBarWidget.showSnackBar(
+        context,
+        'No Product added yet.',
+      );
+    }
   }
 
   @override

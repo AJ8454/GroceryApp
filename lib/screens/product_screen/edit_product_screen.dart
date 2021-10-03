@@ -8,7 +8,6 @@ import 'package:grocery_app/provider/product_provider.dart';
 import 'package:grocery_app/utility/constant.dart';
 import 'package:grocery_app/widget/snack_bar.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class EditProductScreen extends StatefulWidget {
@@ -20,7 +19,6 @@ class EditProductScreen extends StatefulWidget {
 
 class _EditProductScreenState extends State<EditProductScreen> {
   File? _image;
-  var _isInit = true;
   var _isLoading = false;
   final FocusScopeNode _node = FocusScopeNode();
   final _form = GlobalKey<FormState>();

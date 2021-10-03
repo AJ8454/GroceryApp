@@ -4,11 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'initial_page.dart';
+import 'provider/cart_provider.dart';
 import 'provider/email_sign_in_provider.dart';
 import 'provider/google_sign_in_provider.dart';
 import 'provider/product_provider.dart';
 import 'provider/theme_provider.dart';
-import 'screens/product_screen/product_screen.dart';
+import 'screens/product_screen/cart_screen.dart';
+import 'screens/product_screen/edit_product_screen.dart';
+import 'screens/product_screen/product_detail_screen.dart';
 import 'utility/constant.dart';
 import 'utility/theme_data.dart';
 
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => GoogleSignInProvider()),
         ChangeNotifierProvider(create: (ctx) => EmailSignInProvider()),
         ChangeNotifierProvider(create: (ctx) => ProductProvider()),
+        ChangeNotifierProvider(create: (ctx) => CartProvider()),
       ],
       builder: (context, _) {
         final themeProvider = Provider.of<ThemeProvider>(context);
@@ -46,7 +50,8 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (ctx) => const InitialPage(),
              '/EditProductScreen': (context) => const EditProductScreen(),
-            // '/ProductDetailScreen': (context) => const ProductDetailScreen(),
+             '/ProductDetailScreen': (context) => const ProductDetailScreen(),
+             '/CartScreen': (context) => const CartScreen(),
           },
         );
       },
