@@ -9,16 +9,16 @@ class MyThemeData {
     colorScheme: const ColorScheme.dark(),
     bottomSheetTheme:
         const BottomSheetThemeData(backgroundColor: Colors.transparent),
-    
   );
 
   static final lightTheme = ThemeData(
-      fontFamily: 'OnePlus-Regular',
-      scaffoldBackgroundColor: kLightColor,
-      primaryColor: Colors.black,
-      appBarTheme: const AppBarTheme(backgroundColor: kCarrotColor),
-      colorScheme: const ColorScheme.light(),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: kCarrotColor,
-      ));
+    fontFamily: 'OnePlus-Regular',
+    scaffoldBackgroundColor: kLightColor,
+    primaryColor: Colors.black,
+    appBarTheme: const AppBarTheme(backgroundColor: kCarrotColor),
+    colorScheme: const ColorScheme.light(),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: kCarrotColor,
+    ),
+  );
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/utility/constant.dart';
 import 'package:grocery_app/widget/cart_item.dart';
+import 'package:grocery_app/widget/placeorder_dialog_widget.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
@@ -63,10 +64,10 @@ class _CartScreenState extends State<CartScreen> {
           )
         ],
       ),
-      bottomNavigationBar: cart.totalAmount == 0.0
+      bottomSheet: cart.totalAmount == 0.0
           ? null
-          : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: OrderButton(cart: cart),
             ),
     );
@@ -90,11 +91,10 @@ class _OrderButtonState extends State<OrderButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        
+        minimumSize: const Size(double.infinity, 40),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
-           
-            ),
+          borderRadius: BorderRadius.circular(18.0),
+        ),
         elevation: 8,
         padding: const EdgeInsets.symmetric(horizontal: 50),
       ),
