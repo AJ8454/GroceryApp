@@ -8,6 +8,7 @@ import 'provider/email_sign_in_provider.dart';
 import 'provider/google_sign_in_provider.dart';
 import 'provider/product_provider.dart';
 import 'provider/theme_provider.dart';
+import 'screens/product_screen/product_screen.dart';
 import 'utility/constant.dart';
 import 'utility/theme_data.dart';
 
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (ctx) => const InitialPage(),
-            // '/ProductOverviewScreen': (context) => const ProductOverviewScreen(),
+             '/EditProductScreen': (context) => const EditProductScreen(),
             // '/ProductDetailScreen': (context) => const ProductDetailScreen(),
           },
         );

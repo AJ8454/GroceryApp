@@ -27,6 +27,7 @@ class ProductProvider with ChangeNotifier {
         loadedProducts.add(Product(
           id: prodId,
           title: prodData['title'],
+          description: prodData['description'],
           imageUrl: prodData['imageUrl'],
           rate: prodData['rate'],
         ));
@@ -46,6 +47,7 @@ class ProductProvider with ChangeNotifier {
         Uri.parse(url),
         body: json.encode({
           'title': product.title,
+          'description': product.description,
           'imageUrl': product.imageUrl,
           'rate': product.rate,
         }),
@@ -53,6 +55,7 @@ class ProductProvider with ChangeNotifier {
       final newProduct = Product(
         id: json.decode(response.body)['name'],
         title: product.title,
+        description: product.description,
         imageUrl: product.imageUrl,
         rate: product.rate,
       );
@@ -71,6 +74,7 @@ class ProductProvider with ChangeNotifier {
       await http.patch(Uri.parse(url),
           body: json.encode({
             'title': newProduct.title,
+            'description': newProduct.description,
             'imageUrl': newProduct.imageUrl,
             'rate': newProduct.rate,
           }));

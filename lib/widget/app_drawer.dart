@@ -18,7 +18,7 @@ class AppDrawer extends StatelessWidget {
               height: 60,
               child: DrawerHeader(
                 decoration: BoxDecoration(
-                  color: kGreyColor,
+                  color: kCarrotColor,
                 ),
                 child: Text(
                   'Grocery',
@@ -32,24 +32,14 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             const DrawerListTile(
-              name: 'Products',
-              icon: Icons.production_quantity_limits,
+              name: 'Home',
+              icon: Icons.home,
               navigate: '/ProductScreen',
             ),
             const DrawerListTile(
-              name: 'Employees',
-              icon: Icons.person,
-              navigate: '/EmployeeScreen',
-            ),
-            const DrawerListTile(
-              name: 'Attendance',
-              icon: Icons.group,
-              navigate: '/OrderScreen',
-            ),
-            const DrawerListTile(
-              name: 'Orders',
-              icon: Icons.local_shipping_rounded,
-              navigate: '/OrderScreen',
+              name: 'Add Product',
+              icon: Icons.production_quantity_limits,
+              navigate: '/EditProductScreen',
             ),
             Row(
               children: const [
@@ -63,7 +53,6 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(
                 Icons.exit_to_app,
-                color: kDarkColor,
               ),
               title: const Text(
                 'Logout',
@@ -98,14 +87,13 @@ class DrawerListTile extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: kDarkColor,
       ),
       title: Text(
         name!,
         style: const TextStyle(fontSize: 13),
       ),
       onTap: () {
-        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.of(context).pop();
         Navigator.of(context).pushNamed(navigate!);
       },
     );
