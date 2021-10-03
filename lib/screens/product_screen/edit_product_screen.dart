@@ -27,6 +27,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     id: null,
     title: '',
     description: '',
+    productType: '',
     rate: 0.0,
     imageUrl: '',
   );
@@ -67,7 +68,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Product Add/Update',
+          'Product Add',
           style: kAppbarTextStyle,
         ),
         actions: [
@@ -111,6 +112,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                             id: _editProduct.id,
                                             description:
                                                 _editProduct.description,
+                                            productType:
+                                                _editProduct.productType,
                                             imageUrl: _editProduct.imageUrl,
                                             rate: _editProduct.rate,
                                           );
@@ -134,6 +137,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                             id: _editProduct.id,
                                             description:
                                                 _editProduct.description,
+                                            productType:
+                                                _editProduct.productType,
                                             imageUrl: _editProduct.imageUrl,
                                             rate: double.parse(value!),
                                           );
@@ -193,13 +198,38 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               ),
                               TextFormField(
                                 decoration: const InputDecoration(
-                                    labelText: 'Description'),
+                                    labelText: 'Product Type'),
                                 textInputAction: TextInputAction.next,
                                 onEditingComplete: _node.nextFocus,
                                 onSaved: (value) {
                                   _editProduct = Product(
                                     title: _editProduct.title,
                                     id: _editProduct.id,
+                                    productType: value,
+                                    description: _editProduct.description,
+                                    imageUrl: _editProduct.imageUrl,
+                                    rate: _editProduct.rate,
+                                  );
+                                },
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter a product type.';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                    labelText: 'Description'),
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.multiline,
+                                maxLines: 3,
+                                onEditingComplete: _node.nextFocus,
+                                onSaved: (value) {
+                                  _editProduct = Product(
+                                    title: _editProduct.title,
+                                    id: _editProduct.id,
+                                    productType: _editProduct.productType,
                                     description: value,
                                     imageUrl: _editProduct.imageUrl,
                                     rate: _editProduct.rate,
@@ -306,6 +336,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         title: _editProduct.title,
         id: _editProduct.id,
         description: _editProduct.description,
+        productType: _editProduct.productType,
         imageUrl: _imageUrl,
         rate: _editProduct.rate,
       );

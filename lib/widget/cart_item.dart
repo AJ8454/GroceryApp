@@ -80,7 +80,7 @@ class CartItemView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: ListTile(
-            leading: imageUrl!.contains('firebasestorage')
+            leading: imageUrl!.contains('/')
                 ? CircleAvatar(
                     radius: 25,
                     backgroundColor: Colors.grey[200],

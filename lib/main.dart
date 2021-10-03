@@ -49,9 +49,9 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (ctx) => const InitialPage(),
-             '/EditProductScreen': (context) => const EditProductScreen(),
-             '/ProductDetailScreen': (context) => const ProductDetailScreen(),
-             '/CartScreen': (context) => const CartScreen(),
+            '/EditProductScreen': (context) => const EditProductScreen(),
+            '/ProductDetailScreen': (context) => const ProductDetailScreen(),
+            '/CartScreen': (context) => const CartScreen(),
           },
         );
       },

@@ -36,7 +36,7 @@ class GridItems extends StatelessWidget {
                 child: SizedBox(
                   height: 80,
                   width: 60,
-                  child: imageUrl!.contains('firebasestorage')
+                  child: imageUrl!.contains('/')
                       ? Image.network(
                           imageUrl!,
                         )

@@ -5,7 +5,8 @@ import 'package:grocery_app/utility/constant.dart';
 import 'package:grocery_app/widget/app_drawer.dart';
 import 'package:grocery_app/widget/badge.dart';
 import 'package:grocery_app/widget/change_theme_button.dart';
-import 'package:grocery_app/widget/home_screen_widget/product_grid.dart';
+import 'package:grocery_app/widget/home_screen_widget/grid_items.dart';
+import 'package:grocery_app/widget/snack_bar.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,35 +17,75 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var _isLoading = false;
-  var _isInit = true;
+  final TextEditingController _searchController = TextEditingController();
+  List _allResult = [];
+  List _searchResultList = [];
+  List? data;
+  Future? resultLoaded;
+  var _isLoading = true;
 
-  @override
-  void didChangeDependencies() {
-    fetchAllProducts();
-    super.didChangeDependencies();
-  }
-
-  Future<void> fetchAllProducts() async {
+  _refreshProducts() async {
     try {
-      if (_isInit) {
+      await Provider.of<ProductProvider>(context, listen: false)
+          .fetchAndSetProducts()
+          .then((_) {
+        data = Provider.of<ProductProvider>(context, listen: false).items;
         setState(() {
-          _isLoading = true;
+          _allResult = data!;
+          _isLoading = false;
         });
-        await Provider.of<ProductProvider>(context)
-            .fetchAndSetProducts()
-            .then((_) {
-          setState(() {
-            _isLoading = false;
-          });
-        }); // It work
-      }
-      _isInit = false;
+      });
+      searchResulList();
+      return 'complete';
     } catch (error) {
       setState(() {
         _isLoading = false;
       });
+      SnackBarWidget.showSnackBar(
+        context,
+        'No Product Added yet',
+      );
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultLoaded = _refreshProducts();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  _onSearchChanged() {
+    searchResulList();
+  }
+
+  searchResulList() {
+    var showResult = [];
+    if (_searchController.text != '') {
+      showResult = _allResult.where((prod) {
+        var proTitle = prod.title!.toLowerCase();
+        var proType = prod.productType!.toLowerCase();
+        return proTitle.contains(_searchController.text.toLowerCase()) ||
+            proType.contains(_searchController.text.toLowerCase());
+      }).toList();
+    } else {
+      showResult = List.from(_allResult);
+    }
+    setState(() {
+      _searchResultList = showResult;
+    });
   }
 
   @override
@@ -58,9 +99,49 @@ class _HomeScreenState extends State<HomeScreen> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : const ProductGrid(),
+          : Padding(
+              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+              child: Column(
+                children: [
+                  Container(
+                    height: 42,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Theme.of(context).primaryColor),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.search),
+                        hintText: 'search...',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GridView.builder(
+                      padding: const EdgeInsets.all(8),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 2 / 3,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                      ),
+                      itemCount: _searchResultList.length,
+                      itemBuilder: (context, i) => GridItems(
+                        id: _searchResultList[i].id,
+                        imageUrl: _searchResultList[i].imageUrl,
+                        price: _searchResultList[i].rate.toString(),
+                        title: _searchResultList[i].title,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
-        
         onPressed: () => Navigator.of(context).pushNamed('/CartScreen'),
         child: Consumer<CartProvider>(
           builder: (_, cart, ch) => Badge(

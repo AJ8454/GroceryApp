@@ -93,9 +93,7 @@ class _OrderButtonState extends State<OrderButton> {
         
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),
-            // side: BorderSide(
-            //   color: HexColor('#374A5A'),
-            // )
+           
             ),
         elevation: 8,
         padding: const EdgeInsets.symmetric(horizontal: 50),

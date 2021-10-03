@@ -20,7 +20,6 @@ class ProductDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const BackButton(),
-            const SizedBox(height: 10),
             Align(
               alignment: Alignment.center,
               child: Column(
@@ -38,7 +37,7 @@ class ProductDetailScreen extends StatelessWidget {
                       color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: loadedData.imageUrl.contains('firebasestorage')
+                    child: loadedData.imageUrl.contains('/')
                         ? Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
@@ -83,7 +82,10 @@ class ProductDetailScreen extends StatelessWidget {
         ),
       ),
       bottomSheet: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(
+          vertical: 8,
+          horizontal: 8,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

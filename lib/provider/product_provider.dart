@@ -28,6 +28,7 @@ class ProductProvider with ChangeNotifier {
           id: prodId,
           title: prodData['title'],
           description: prodData['description'],
+          productType: prodData['productType'],
           imageUrl: prodData['imageUrl'],
           rate: prodData['rate'],
         ));
@@ -48,6 +49,7 @@ class ProductProvider with ChangeNotifier {
         body: json.encode({
           'title': product.title,
           'description': product.description,
+          'productType': product.productType,
           'imageUrl': product.imageUrl,
           'rate': product.rate,
         }),
@@ -56,6 +58,7 @@ class ProductProvider with ChangeNotifier {
         id: json.decode(response.body)['name'],
         title: product.title,
         description: product.description,
+        productType: product.productType,
         imageUrl: product.imageUrl,
         rate: product.rate,
       );
@@ -75,6 +78,7 @@ class ProductProvider with ChangeNotifier {
           body: json.encode({
             'title': newProduct.title,
             'description': newProduct.description,
+            'productType': newProduct.productType,
             'imageUrl': newProduct.imageUrl,
             'rate': newProduct.rate,
           }));
