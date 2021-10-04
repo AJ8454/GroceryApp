@@ -9,6 +9,7 @@ import 'provider/email_sign_in_provider.dart';
 import 'provider/google_sign_in_provider.dart';
 import 'provider/product_provider.dart';
 import 'provider/theme_provider.dart';
+import 'screens/place_order_form.dart';
 import 'screens/product_screen/cart_screen.dart';
 import 'screens/product_screen/edit_product_screen.dart';
 import 'screens/product_screen/product_detail_screen.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
             '/EditProductScreen': (context) => const EditProductScreen(),
             '/ProductDetailScreen': (context) => const ProductDetailScreen(),
             '/CartScreen': (context) => const CartScreen(),
+            // '/PlaceOrderForm': (context) => const PlaceOrderForm(),
           },
         );
       },

@@ -5,6 +5,8 @@ import 'package:grocery_app/widget/cart_item.dart';
 import 'package:grocery_app/widget/placeorder_dialog_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../place_order_form.dart';
+
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
 
@@ -98,7 +100,10 @@ class _OrderButtonState extends State<OrderButton> {
         elevation: 8,
         padding: const EdgeInsets.symmetric(horizontal: 50),
       ),
-      onPressed: () {},
+      onPressed: () => showDialog(
+        context: context,
+        builder: (ctx) => const PlaceOrderDialogWidget(),
+      ),
       child: const Text(
         'PLACE ORDER',
         style: TextStyle(

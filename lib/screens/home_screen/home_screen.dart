@@ -152,7 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(
               Icons.shopping_cart_outlined,
               size: 25,
-            
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('/CartScreen');

@@ -1,12 +1,17 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class UserDetailFormWidget extends StatelessWidget {
-  const UserDetailFormWidget({ Key? key }) : super(key: key);
+// class UserDetailFormWidget extends StatefulWidget {
+//   const UserDetailFormWidget({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
-}
+//   @override
+//   State<UserDetailFormWidget> createState() => _UserDetailFormWidgetState();
+// }
+
+// class _UserDetailFormWidgetState extends State<UserDetailFormWidget> {
+ 
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
