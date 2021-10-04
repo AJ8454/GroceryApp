@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/models/cart.dart';
 import 'package:grocery_app/models/customer.dart';
 import 'package:grocery_app/models/invoice.dart';
 import 'package:grocery_app/models/pdf_api.dart';
 import 'package:grocery_app/models/pdf_invoice_api.dart';
 import 'package:grocery_app/models/supplier.dart';
+import 'package:grocery_app/provider/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class PlaceOrderDialogWidget extends StatefulWidget {
   const PlaceOrderDialogWidget({Key? key}) : super(key: key);
@@ -18,7 +21,6 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
   TextEditingController fNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  List<InvoiceItem> dataInvoice = [];
 
   @override
   void dispose() {
@@ -27,6 +29,7 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
   }
 
   Future<void> _submitForm() async {
+    final provider = Provider.of<CartProvider>(context, listen: false);
     final date = DateTime.now();
     final isValid = _form.currentState!.validate();
     if (!isValid) {
@@ -35,31 +38,41 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
     _form.currentState!.save();
 
     final invoice = Invoice(
-        supplier: const Supplier(
-          name: 'Samarth Pandit',
-          address: 'NalaSupara',
-          sMobNumber: '9654781325',
-        ),
-        customer: Customer(
-          name: fNameController.text,
-          cMobNumber: phoneNumberController.text,
-          address: addressController.text,
-        ),
-        info: InvoiceInfo(
-          description: 'xyz description',
-          date: date,
-        ),
-        items: const [
-          InvoiceItem(name: 'Rice', quantity: 5, unitPrice: 900),
-          InvoiceItem(name: 'Rice', quantity: 5, unitPrice: 900),
-          InvoiceItem(name: 'Rice', quantity: 5, unitPrice: 900),
-          InvoiceItem(name: 'Rice', quantity: 5, unitPrice: 900),
-        ]);
+      supplier: const Supplier(
+        name: 'Samarth Pandit',
+        address: 'NalaSupara',
+        sMobNumber: '9654781325',
+      ),
+      customer: Customer(
+        name: fNameController.text,
+        cMobNumber: phoneNumberController.text,
+        address: addressController.text,
+      ),
+      info: InvoiceInfo(
+        description: 'xyz description',
+        date: date,
+      ),
+      items: _cartData(),
+    );
 
     final pdfFile = await PdfInvoiceApi.generate(invoice);
 
     PdfApi.openFile(pdfFile);
-    //Navigator.of(context).pop();
+
+    Navigator.of(context).popUntil((route) => route.isFirst);
+  }
+
+  _cartData() {
+    final provider = Provider.of<CartProvider>(context, listen: false);
+    final cartData = List.generate(
+      provider.itemsList.length,
+      (i) => InvoiceItem(
+          name: provider.items.values.toList()[i].title,
+          quantity: provider.items.values.toList()[i].quantity,
+          unitPrice: provider.items.values.toList()[i].price),
+    );
+
+    return cartData;
   }
 
   @override

@@ -7,7 +7,7 @@ class CartItem {
 
   CartItem(
     this.imageUrl, {
-    required this.id,
+     this.id,
     required this.title,
     required this.quantity,
     required this.price,
