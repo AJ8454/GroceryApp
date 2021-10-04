@@ -1,5 +1,3 @@
-import 'package:grocery_app/models/cart.dart';
-
 import 'customer.dart';
 import 'supplier.dart';
 

@@ -48,6 +48,8 @@ class GridItems extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 title!,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 16),
               ),
               Row(
@@ -56,7 +58,7 @@ class GridItems extends StatelessWidget {
                   Text(
                     '\u20B9 ${price!}',
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.green,
                     ),
                   ),

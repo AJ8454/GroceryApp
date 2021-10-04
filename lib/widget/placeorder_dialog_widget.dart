@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/models/cart.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:grocery_app/models/customer.dart';
 import 'package:grocery_app/models/invoice.dart';
 import 'package:grocery_app/models/pdf_api.dart';
@@ -29,7 +29,6 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
   }
 
   Future<void> _submitForm() async {
-    final provider = Provider.of<CartProvider>(context, listen: false);
     final date = DateTime.now();
     final isValid = _form.currentState!.validate();
     if (!isValid) {
@@ -59,13 +58,13 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
 
     PdfApi.openFile(pdfFile);
 
-    Navigator.of(context).popUntil((route) => route.isFirst);
+    Phoenix.rebirth(context);
   }
 
   _cartData() {
     final provider = Provider.of<CartProvider>(context, listen: false);
     final cartData = List.generate(
-      provider.itemsList.length,
+      provider.items.length,
       (i) => InvoiceItem(
           name: provider.items.values.toList()[i].title,
           quantity: provider.items.values.toList()[i].quantity,

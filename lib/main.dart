@@ -2,14 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'initial_page.dart';
 import 'provider/cart_provider.dart';
 import 'provider/email_sign_in_provider.dart';
 import 'provider/google_sign_in_provider.dart';
 import 'provider/product_provider.dart';
 import 'provider/theme_provider.dart';
-import 'screens/place_order_form.dart';
 import 'screens/product_screen/cart_screen.dart';
 import 'screens/product_screen/edit_product_screen.dart';
 import 'screens/product_screen/product_detail_screen.dart';
@@ -23,7 +22,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(const MyApp());
+  runApp( Phoenix(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

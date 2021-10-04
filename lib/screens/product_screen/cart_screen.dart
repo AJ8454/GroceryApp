@@ -5,8 +5,6 @@ import 'package:grocery_app/widget/cart_item.dart';
 import 'package:grocery_app/widget/placeorder_dialog_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../place_order_form.dart';
-
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
 

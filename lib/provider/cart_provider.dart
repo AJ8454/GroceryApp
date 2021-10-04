@@ -3,11 +3,7 @@ import './/models/cart.dart';
 
 class CartProvider with ChangeNotifier {
   late Map<String, CartItem> _items = {};
-  // List<CartItem> _itemList = [];
-
-  List get itemsList {
-    return _items.values.toList();
-  }
+ 
 
   Map<String, CartItem> get items {
     return {..._items};
