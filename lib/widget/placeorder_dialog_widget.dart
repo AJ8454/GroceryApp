@@ -59,6 +59,7 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
     final pdfFile = await PdfInvoiceApi.generate(invoice);
 
     PdfApi.openFile(pdfFile);
+    //Navigator.of(context).pop();
   }
 
   @override
