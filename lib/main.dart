@@ -52,7 +52,6 @@ class MyApp extends StatelessWidget {
             '/EditProductScreen': (context) => const EditProductScreen(),
             '/ProductDetailScreen': (context) => const ProductDetailScreen(),
             '/CartScreen': (context) => const CartScreen(),
-            // '/PlaceOrderForm': (context) => const PlaceOrderForm(),
           },
         );
       },
