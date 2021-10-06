@@ -49,14 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    resultLoaded = _refreshProducts();
-  }
-
-  @override
   void initState() {
     super.initState();
+    resultLoaded = _refreshProducts();
     _searchController.addListener(_onSearchChanged);
   }
 
@@ -92,8 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(kApptitle, style: kAppbarTextStyle),
-          actions: const [ChangeThemeButtonWidget()]),
+        title: const Text(kApptitle, style: kAppbarTextStyle),
+        actions: const [ChangeThemeButtonWidget()],
+      ),
       drawer: const AppDrawer(),
       body: _isLoading
           ? const Center(

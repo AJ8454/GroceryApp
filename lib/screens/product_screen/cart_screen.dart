@@ -98,7 +98,7 @@ class _OrderButtonState extends State<OrderButton> {
         elevation: 8,
         padding: const EdgeInsets.symmetric(horizontal: 50),
       ),
-      onPressed: () => showDialog(
+      onPressed: ()  => showDialog(
         context: context,
         builder: (ctx) => const PlaceOrderDialogWidget(),
       ),
