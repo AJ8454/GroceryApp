@@ -49,9 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultLoaded = _refreshProducts();
+  }
+
+  @override
   void initState() {
     super.initState();
-    resultLoaded = _refreshProducts();
     _searchController.addListener(_onSearchChanged);
   }
 
@@ -116,21 +121,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Expanded(
-                    child: GridView.builder(
-                      padding: const EdgeInsets.all(8),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 2 / 3,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5,
-                      ),
-                      itemCount: _searchResultList.length,
-                      itemBuilder: (context, i) => GridItems(
-                        id: _searchResultList[i].id,
-                        imageUrl: _searchResultList[i].imageUrl,
-                        price: _searchResultList[i].rate.toString(),
-                        title: _searchResultList[i].title,
+                    child: RefreshIndicator(
+                      onRefresh: () => _refreshProducts(),
+                      child: GridView.builder(
+                        padding: const EdgeInsets.all(8),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 2 / 3,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
+                        ),
+                        itemCount: _searchResultList.length,
+                        itemBuilder: (context, i) => GridItems(
+                          id: _searchResultList[i].id,
+                          imageUrl: _searchResultList[i].imageUrl,
+                          price: _searchResultList[i].rate.toString(),
+                          title: _searchResultList[i].title,
+                        ),
                       ),
                     ),
                   ),

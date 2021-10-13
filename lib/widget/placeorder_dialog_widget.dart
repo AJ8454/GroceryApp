@@ -38,9 +38,9 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
 
     final invoice = Invoice(
       supplier: const Supplier(
-        name: 'Samarth Pandit',
-        address: 'NalaSupara',
-        sMobNumber: '9654781325',
+        name: 'Grocery App',
+        address: 'Online Food and Grocey Store',
+        sMobNumber: 'Contact:  9654781325',
       ),
       customer: Customer(
         name: fNameController.text,
@@ -48,7 +48,7 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
         address: addressController.text,
       ),
       info: InvoiceInfo(
-        description: 'xyz description',
+        description: 'Payment Mode: CASH',
         date: date,
       ),
       items: _cartData(),
@@ -141,8 +141,7 @@ class _PlaceOrderDialogWidgetState extends State<PlaceOrderDialogWidget> {
                       ),
                       const SizedBox(height: 10),
                       ElevatedButton(
-                        onPressed: () {},
-                        // => _submitForm(),
+                        onPressed: () => _submitForm(),
                         child: const Text('Generate Invoice'),
                       )
                     ],
